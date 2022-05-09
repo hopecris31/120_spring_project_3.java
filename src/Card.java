@@ -37,20 +37,6 @@ public class Card {
      * turned into Face card values
      */
     public String toString(){
-        if (this.rank == 11){
-            return "Jack";
-        }
-        else if (this.rank == 12) {
-            return "Queen";
-        }
-        else if (this.rank == 13) {
-            return "King";
-        }
-        else if (this.rank == 14) {
-            return "Ace";
-        }
-        else {  //whole card -- just change type
-            return "" + this.rank; //make int a string
-        }
+            return getRank() + " of "  + getSuit();
     }
 }
