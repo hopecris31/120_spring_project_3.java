@@ -37,6 +37,14 @@ public class Card {
      * turned into Face card values
      */
     public String toString(){
-            return getRank() + " of "  + getSuit();
+        String rankString = String.valueOf(getRank());
+        rank = getRank();
+        switch (rankString) {
+            case "11" -> rankString = "Jack";
+            case "12" -> rankString = "Queen";
+            case "13" -> rankString = "King";
+            case "14" -> rankString = "Ace";
+        }
+        return rankString + " of "  + getSuit();
     }
 }

@@ -5,6 +5,8 @@ public class main {
 
       newDeck.shuffle();
       System.out.println(newDeck);
+      newDeck.deal();
+      System.out.println(newDeck.deal());
 
     }
 
