@@ -13,6 +13,8 @@ public class Deck {
     public int nextToDeal;
     public final int[] RANKS = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}; // syntax for defining an array
     public final String[] SUITS = {"Spades", "Hearts", "Diamonds", "Clubs"};
+    public String strCard;
+    //public ArrayList<String> strDeck;
 
 
     /**
@@ -56,9 +58,12 @@ public class Deck {
         this.nextToDeal = 0;
     }
 
-    //public String toString(){ // loop through all cards in deck, add to string, (card class needs string method), then return string with all cards
-    //    for(Card card : this.deck){
-    //    }
-        //return ;
-   // }
+    public String toString(){ // loop through all cards in deck, add to string, (card class needs string method), then return string with all cards
+        ArrayList<String> strDeck= new ArrayList<>();
+        for(Card card : this.deck){
+            strCard = card + "";
+            strDeck.add(strCard);
+        }
+        return strDeck;
+    }
 }
