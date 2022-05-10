@@ -1,10 +1,7 @@
 //package proj3; // do not erase. Gradescope expects this.
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 
