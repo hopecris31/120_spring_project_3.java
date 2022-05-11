@@ -6,6 +6,8 @@ import java.util.Comparator;
 
 public class PokerHand {
 
+    public final int HAND_SIZE = 5;
+
     //public ArrayList<Card> handRanks;
     public ArrayList<Card> hand;
     //private ArrayList<Integer> listRanks;
@@ -19,6 +21,13 @@ public class PokerHand {
         if (this.hand.size() < 5) {
             this.hand.add(card);
         }
+    }
+
+    public Card getCard(int index){
+        if(index > HAND_SIZE-1 || index < 0){
+            return null;
+        }
+        return this.hand.get(index);
     }
 
     private ArrayList<Integer> getHandRanks() {
@@ -109,6 +118,80 @@ public class PokerHand {
             }
         }
         return listPairs;
+    }
+
+    private int compareHighCard(PokerHand other){
+        ArrayList<Integer> selfRanks = this.getHandRanks();
+        ArrayList<Integer> otherRanks = other.getHandRanks();
+        selfRanks.sort(Collections.reverseOrder());
+        otherRanks.sort(Collections.reverseOrder());
+
+        for(int card = 0; card < selfRanks.size(); card++){
+            if(selfRanks.get(card) > otherRanks.get(card)){
+                return 1;
+            }
+            else if(selfRanks.get(card) < otherRanks.get(card)){
+                return -1;
+            }
+        }
+        return 0;
+    }
+
+    private int compareHandSameType(PokerHand other){
+        ArrayList<Integer> selfPair = this.getPairs();
+        ArrayList<Integer> otherPair = other.getPairs();
+        selfPair.sort(Collections.reverseOrder());
+        otherPair.sort(Collections.reverseOrder());
+
+        if (this.isPair() && other.isPair()){
+            for(int pair = 0; pair < selfPair.size(); pair++){
+                if(selfPair.get(pair) > otherPair.get(pair)){
+                    return 1;
+                }
+                else if(selfPair.get(pair) < otherPair.get(pair)){
+                    return -1;
+                }
+            }
+        }
+        return this.compareHighCard(other);
+    }
+
+    private int handTypeWorth(){
+        if(this.isFlush()){
+            return 4;
+        }
+        if(this.isFourKind()){
+            return 3;
+        }
+        else if(this.isTwoPair()){
+            return 3;
+        }
+        else if(this.isThreeKind()){
+            return 2;
+        }
+        else if(this.isPair()){
+            return 2;
+        }
+        else{
+            return 1;
+        }
+    }
+
+    public int compareTo(PokerHand other){
+        if(this.handTypeWorth() > other.handTypeWorth()){
+            return 1;
+        }
+        else if(this.handTypeWorth() < other.handTypeWorth()){
+            return -1;
+        }
+        if(this.getHandType().equals(other.getHandType())){
+            return this.compareHandSameType(other);
+        }
+        return this.compareHighCard(other);
+    }
+
+    public String toString(){
+        return String.valueOf(this.hand);
     }
 
 }
