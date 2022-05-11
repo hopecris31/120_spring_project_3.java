@@ -1,4 +1,4 @@
-//package proj3; // do not erase. Gradescope expects this.
+package proj3; // do not erase. Gradescope expects this.
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -7,11 +7,7 @@ import java.util.Comparator;
 public class PokerHand {
 
     public final int HAND_SIZE = 5;
-
-    //public ArrayList<Card> handRanks;
     public ArrayList<Card> hand;
-    //private ArrayList<Integer> listRanks;
-
 
     public PokerHand(ArrayList<Card> cardList) {
         this.hand = (ArrayList<Card>) cardList.clone();
@@ -53,7 +49,7 @@ public class PokerHand {
         ArrayList<Integer> handRanks = getHandRanks();
         for (int card1 = 0; card1 < handRanks.size(); card1++) {
             for (int card2 = 1; card2 < handRanks.size(); card2++) {
-                if (handRanks.get(card1).equals(card2)) {
+                if (handRanks.get(card1).equals(handRanks.get(card2))) {
                     return true;
                 }
             }
@@ -61,7 +57,7 @@ public class PokerHand {
         return false;
     }
 
-    private boolean isTwoPair() {
+    private boolean isTwoPair() { //check
         if (this.isPair()) {
             int numPairs = 0;
             ArrayList<Integer> handRanks = getHandRanks();
