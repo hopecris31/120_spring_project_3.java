@@ -2,6 +2,7 @@ package proj3; // do not erase. Gradescope expects this.
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Objects;
 
 
 public class PokerHand {
@@ -106,7 +107,7 @@ public class PokerHand {
         ArrayList<Integer> listPairs = new ArrayList<>();
         if(this.isPair()){
             for (int card1 = 0; card1 < this.hand.size(); card1++) {
-                for (int card2 = 1; card2 < this.hand.size(); card2++) {
+                for (int card2 = card1+1; card2 < this.hand.size(); card2++) {
                     if(this.hand.get(card1).getRank() == this.hand.get(card2).getRank() && !listPairs.contains(this.hand.get(card1).getRank())){
                             listPairs.add(this.hand.get(card1).getRank());
                     }
@@ -146,6 +147,9 @@ public class PokerHand {
                 }
                 else if(selfPair.get(pair) < otherPair.get(pair)){
                     return -1;
+                }
+                else if(Objects.equals(selfPair.get(pair), otherPair.get(pair))){
+                    return this.compareHighCard(other);
                 }
             }
         }

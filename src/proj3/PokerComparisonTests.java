@@ -68,16 +68,31 @@ public class PokerComparisonTests {
 
 
         PokerHand pair1 = new PokerHand(cardList);
-        pair1.addCard(s2);
-        pair1.addCard(s5);
+        pair1.addCard(s12);
+        pair1.addCard(s4);
         pair1.addCard(c5);
-        pair1.addCard(h7);
-        pair1.addCard(c9);
-        //System.out.println(pair1);
-        //System.out.println(highCard1);
+        pair1.addCard(h12);
+        pair1.addCard(c7);
+
+        PokerHand pair2 = new PokerHand(cardList);
+        pair2.addCard(s11);
+        pair2.addCard(s5);
+        pair2.addCard(c11);
+        pair2.addCard(h8);
+        pair2.addCard(c9);
+
+
+
+        PokerHand twoPair1 = new PokerHand(cardList);
+        twoPair1.addCard(s2);
+        twoPair1.addCard(s5);
+        twoPair1.addCard(c5);
+        twoPair1.addCard(h7);
+        twoPair1.addCard(c9);
 
 
         Testing.assertEquals("testing high card and pair", -1, highCard1.compareTo(pair1));
+        Testing.assertEquals("testing pair queen and jack", 1, pair1.compareTo(pair2));
 
     }
 }
