@@ -64,9 +64,7 @@ public class main {
                 correctGuesses += 1;
             }
             else{
-                userAnswerInt = 0;
                 game = false;
-                System.out.println("INVALID INPUT, GAME OVER");
             }
 
             System.out.println("correct answer: " + "HAND " + correctAnswer + " | your answer: " + "HAND " + userAnswerInt);
