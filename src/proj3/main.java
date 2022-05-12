@@ -4,10 +4,6 @@ import java.util.Scanner;
 
 public class main {
 
-    public static void main(String[] args) {
-        playGame();
-    }
-
     private static ArrayList<Card> getHandCards(int handSize, Deck deck){
         ArrayList<Card> handCards = new ArrayList<>();
         for(int i = 0; i < handSize; i++){
@@ -40,10 +36,10 @@ public class main {
             System.out.println(" ");
 
             int correctAnswer = hand1.compareTo(hand2);
+            //System.out.println(correctAnswer);
             Scanner userAnswer = new Scanner(System.in);
             int userAnswerInt =  userAnswer.nextInt(); // converts user answer from scanner to int, use this in compare
 
-            System.out.print("YOUR GUESS: ");
             userAnswer.nextLine();
 
             if(correctAnswer == -1){
@@ -59,7 +55,7 @@ public class main {
                 game = false;
             }
 
-            System.out.println("correct answer: " + "HAND" + correctAnswer + "| your answer: " + "HAND" + userAnswerInt);
+            System.out.println("correct answer: " + "HAND" + correctAnswer + " | your answer: " + "HAND" + userAnswerInt);
             System.out.println("correct guesses: " + correctGuesses);
 
             if(!game){
@@ -69,5 +65,8 @@ public class main {
                 System.out.println("All hands have been dealt!");
             }
         }
+    }
+    public static void main(String[] args) {
+        playGame();
     }
 }

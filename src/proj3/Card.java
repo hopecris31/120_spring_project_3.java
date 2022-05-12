@@ -38,12 +38,18 @@ public class Card {
      */
     public String toString(){
         String rankString = String.valueOf(getRank());
-        rank = getRank();
-        switch (rankString) {
-            case "11" -> rankString = "Jack";
-            case "12" -> rankString = "Queen";
-            case "13" -> rankString = "King";
-            case "14" -> rankString = "Ace";
+        //rank = getRank();
+        if(rankString.equals("11")){
+            rankString = "Jack";
+        }
+        else if(rankString.equals("12")){
+            rankString = "Queen";
+        }
+        else if(rankString.equals("13")){
+            rankString = "King";
+        }
+        else if(rankString.equals("14")){
+            rankString = "Ace";
         }
         return rankString + " of "  + getSuit();
     }

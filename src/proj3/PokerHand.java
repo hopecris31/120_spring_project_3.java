@@ -38,17 +38,17 @@ public class PokerHand {
     private boolean isFlush() {
         String firstSuit = this.hand.get(0).getSuit();
         for (Card card : this.hand) {
-            if (firstSuit.equals(card.getSuit())) {
-                return true;
+            if (!firstSuit.equals(card.getSuit())) {
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     private boolean isPair() {
-        ArrayList<Integer> handRanks = getHandRanks();
-        for (int card1 = 0; card1 < handRanks.size(); card1++) {
-            for (int card2 = 1; card2 < handRanks.size(); card2++) {
+        ArrayList<Integer> handRanks = this.getHandRanks();
+        for (int card1 = 0; card1 < handRanks.size()-1; card1++) {
+            for (int card2 = card1+1; card2 < handRanks.size(); card2++) {
                 if (handRanks.get(card1).equals(handRanks.get(card2))) {
                     return true;
                 }
@@ -60,9 +60,9 @@ public class PokerHand {
     private boolean isTwoPair() { //check
         if (this.isPair()) {
             int numPairs = 0;
-            ArrayList<Integer> handRanks = getHandRanks();
-            for (int card1 = 0; card1 < handRanks.size(); card1++) {
-                for (int card2 = 0; card2 < handRanks.size() - card1 - 1; card2++) {
+            ArrayList<Integer> handRanks = this.getHandRanks();
+            for (int card1 = 0; card1 < handRanks.size()-1; card1++) {
+                for (int card2 = card1+1; card2 < handRanks.size(); card2++) {
                     if (handRanks.get(card1).equals(handRanks.get(card2))) {
                         numPairs += 1;
                     }
@@ -74,14 +74,14 @@ public class PokerHand {
     }
 
     private boolean isThreeKind(){
-        ArrayList<Integer> handRanks = getHandRanks();
+        ArrayList<Integer> handRanks = this.getHandRanks();
         handRanks.sort(Comparator.comparing(i -> Collections.frequency(handRanks, i)).reversed());
         int occurrences = Collections.frequency(handRanks, handRanks.get(0));
         return occurrences == 3;
     }
 
     private boolean isFourKind(){
-        ArrayList<Integer> handRanks = getHandRanks();
+        ArrayList<Integer> handRanks = this.getHandRanks();
         handRanks.sort(Comparator.comparing(i -> Collections.frequency(handRanks, i)).reversed());
         int occurrences = Collections.frequency(handRanks, handRanks.get(0));
         return occurrences == 4;
@@ -180,7 +180,7 @@ public class PokerHand {
         else if(this.handTypeWorth() < other.handTypeWorth()){
             return -1;
         }
-        if(this.getHandType().equals(other.getHandType())){
+        if(this.handTypeWorth() == other.handTypeWorth()){
             return this.compareHandSameType(other);
         }
         return this.compareHighCard(other);

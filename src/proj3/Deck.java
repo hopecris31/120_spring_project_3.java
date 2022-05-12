@@ -41,7 +41,12 @@ public class Deck {
     }
 
     public boolean enoughInDeck(int handSize) { //if nextToDeal is at end, return false
-        return this.nextToDeal >= handSize && this.nextToDeal <= this.deck.size() - 1;
+        if(this.size() >= handSize){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
     public Card deal() {
