@@ -33,7 +33,7 @@ public class main {
         Deck deck = new Deck();
         deck.shuffle();
 
-        System.out.println("E1 IF HAND1 IS BETTER,  2 IF HAND2 IS BETTER, OR 0 IF ITS A TIE");
+        System.out.println("E1 IF HAND 1 IS BETTER,  2 IF HAND 2 IS BETTER, OR 0 IF ITS A TIE");
 
         while(game && deck.enoughInDeck(HAND_SIZE)){
             ArrayList<Card> cardList1 = getHandCards(HAND_SIZE, deck);
@@ -64,10 +64,12 @@ public class main {
                 correctGuesses += 1;
             }
             else{
+                userAnswerInt = 0;
                 game = false;
+                System.out.println("INVALID INPUT, GAME OVER");
             }
 
-            System.out.println("correct answer: " + "HAND" + correctAnswer + " | your answer: " + "HAND" + userAnswerInt);
+            System.out.println("correct answer: " + "HAND " + correctAnswer + " | your answer: " + "HAND " + userAnswerInt);
             System.out.println("correct guesses: " + correctGuesses);
 
             if(!game){
