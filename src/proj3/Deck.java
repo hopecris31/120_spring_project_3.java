@@ -1,3 +1,6 @@
+/**
+ * represents a deck object
+ */
 package proj3; // do not erase. Gradescope expects this.
 
 import java.util.ArrayList;
@@ -32,6 +35,9 @@ public class Deck {
         return cards;
     }
 
+    /**
+     * shuffles the deck
+     */
     public void shuffle(){
         int deckSize = this.deck.size();
         for (int i = 0; i < deckSize ; i++){
@@ -40,15 +46,19 @@ public class Deck {
         }
     }
 
+    /**
+     * checks to see of there is enough undealt cards to create a hand of given size
+     * @param handSize number of cards in a hand
+     * @return True if enough cards, false if not
+     */
     public boolean enoughInDeck(int handSize) { //if nextToDeal is at end, return false
-        if(this.size() >= handSize){
-            return true;
-        }
-        else{
-            return false;
-        }
+        return this.size() >= handSize;
     }
 
+    /**
+     * deals the next card from the "top" of the deck
+     * @return a single card
+     */
     public Card deal() {
         if (this.nextToDeal == this.deck.size()){ //😍😍😍
             return null;}
@@ -59,10 +69,17 @@ public class Deck {
         }
     }
 
+    /**
+     * gets the remaining undealt cards in the deck
+     * @return number of undealt cards
+     */
     public int size(){
         return this.deck.size() - this.nextToDeal;
     }
 
+    /**
+     * resets the deck, all cards are undealt
+     */
     public void gather(){
         this.nextToDeal = 0;
     }

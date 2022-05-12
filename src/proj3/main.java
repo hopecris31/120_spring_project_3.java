@@ -1,9 +1,18 @@
+/**
+ * Main runs the game
+ */
 package proj3;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class main {
 
+    /**
+     * creates the list of cards for a hand
+     * @param handSize number of cards per hand
+     * @param deck a deck of cards
+     * @return a list of dealt cards of said quantity
+     */
     private static ArrayList<Card> getHandCards(int handSize, Deck deck){
         ArrayList<Card> handCards = new ArrayList<>();
         for(int i = 0; i < handSize; i++){
@@ -13,6 +22,9 @@ public class main {
         return handCards;
     }
 
+    /**
+     * plays the game
+     */
     public static void playGame() {
         final int HAND_SIZE = 5;
         int correctGuesses = 0;
@@ -21,7 +33,7 @@ public class main {
         Deck deck = new Deck();
         deck.shuffle();
 
-        System.out.println("Enter 1 if hand 1 is better,  2 (or -1, idc im not the boss of you) if hand 2 is better, or 0 if it's a tie");
+        System.out.println("E1 IF HAND1 IS BETTER,  2 IF HAND2 IS BETTER, OR 0 IF ITS A TIE");
 
         while(game && deck.enoughInDeck(HAND_SIZE)){
             ArrayList<Card> cardList1 = getHandCards(HAND_SIZE, deck);
@@ -36,7 +48,7 @@ public class main {
             System.out.println(" ");
 
             int correctAnswer = hand1.compareTo(hand2);
-            //System.out.println(correctAnswer);
+            System.out.println("ENTER YOUR GUESS BELOW: ");
             Scanner userAnswer = new Scanner(System.in);
             int userAnswerInt =  userAnswer.nextInt(); // converts user answer from scanner to int, use this in compare
 
@@ -59,10 +71,10 @@ public class main {
             System.out.println("correct guesses: " + correctGuesses);
 
             if(!game){
-                System.out.println("GAME OVER");
+                System.out.println("INCORRECT GUESS, GAME OVER");
             }
-            if(!deck.enoughInDeck(HAND_SIZE)){
-                System.out.println("All hands have been dealt!");
+            if(!deck.enoughInDeck(HAND_SIZE) && correctGuesses == 5){
+                System.out.println("YOU WIN, ALL HANDS HAVE BEEN DEALT!");
             }
         }
     }

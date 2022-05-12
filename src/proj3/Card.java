@@ -1,7 +1,7 @@
-package proj3; // do not erase. Gradescope expects this.
 /**
- * represents a single card
+ * represents a card object
  */
+package proj3; // do not erase. Gradescope expects this.
 
 public class Card {
 

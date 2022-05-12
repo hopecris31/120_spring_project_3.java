@@ -1,3 +1,6 @@
+/**
+ * Unit testing, tests the compareTo method
+ */
 package proj3;
 
 import java.util.ArrayList;
