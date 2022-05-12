@@ -5,14 +5,13 @@ import java.util.ArrayList;
 public class PokerComparisonTests {
     public static void main(String[] args) {
         Testing testSuite = new Testing();
-
-        testCompareTo();
-
+        Testing.setVerbose(true);
+        testCompareTo(testSuite);
         testSuite.finishTests();
 
     }
 
-    public static void testCompareTo() {
+    public static void testCompareTo(Testing testSuite) {
 
         Card c2 = new Card(2, "Clubs");
         Card c3 = new Card(3, "Clubs");
@@ -58,13 +57,31 @@ public class PokerComparisonTests {
 
         ArrayList<Card> cardList = new ArrayList<Card>();
 
+        PokerHand flush1 = new PokerHand(cardList);
+        flush1.addCard(s2);
+        flush1.addCard(s3);
+        flush1.addCard(s5);
+        flush1.addCard(s7);
+        flush1.addCard(s9);
+        PokerHand flush2 = new PokerHand(cardList);
+        flush2.addCard(h8);
+        flush2.addCard(h9);
+        flush2.addCard(h10);
+        flush2.addCard(h11);
+        flush2.addCard(h12);
 
         PokerHand highCard1 = new PokerHand(cardList);
         highCard1.addCard(s2);
         highCard1.addCard(s3);
         highCard1.addCard(c5);
         highCard1.addCard(h7);
-        highCard1.addCard(c9);
+        highCard1.addCard(c14);
+        PokerHand highCard2 = new PokerHand(cardList);
+        highCard2.addCard(s2);
+        highCard2.addCard(s3);
+        highCard2.addCard(c5);
+        highCard2.addCard(h7);
+        highCard2.addCard(c8);
 
 
         PokerHand pair1 = new PokerHand(cardList);
@@ -73,14 +90,24 @@ public class PokerComparisonTests {
         pair1.addCard(c5);
         pair1.addCard(h12);
         pair1.addCard(c7);
-
         PokerHand pair2 = new PokerHand(cardList);
         pair2.addCard(s11);
         pair2.addCard(s5);
         pair2.addCard(c11);
         pair2.addCard(h8);
         pair2.addCard(c9);
-
+        PokerHand pair3 = new PokerHand(cardList);
+        pair3.addCard(s12);
+        pair3.addCard(s4);
+        pair3.addCard(c5);
+        pair3.addCard(h12);
+        pair3.addCard(c14);
+        PokerHand pair4 = new PokerHand(cardList); // three of a kind
+        pair4.addCard(s12);
+        pair4.addCard(s4);
+        pair4.addCard(c5);
+        pair4.addCard(h12);
+        pair4.addCard(c12);
 
 
         PokerHand twoPair1 = new PokerHand(cardList);
@@ -88,11 +115,57 @@ public class PokerComparisonTests {
         twoPair1.addCard(s5);
         twoPair1.addCard(c5);
         twoPair1.addCard(h7);
-        twoPair1.addCard(c9);
+        twoPair1.addCard(c7);
+        PokerHand twoPair2 = new PokerHand(cardList);
+        twoPair2.addCard(s3);
+        twoPair2.addCard(s13);
+        twoPair2.addCard(c13);
+        twoPair2.addCard(h14);
+        twoPair2.addCard(c14);
+        PokerHand twoPair3 = new PokerHand(cardList);
+        twoPair3.addCard(s5);
+        twoPair3.addCard(s13);
+        twoPair3.addCard(c13);
+        twoPair3.addCard(h14);
+        twoPair3.addCard(c14);
+        PokerHand twoPair4 = new PokerHand(cardList); //four of a kind
+        twoPair4.addCard(s5);
+        twoPair4.addCard(s13);
+        twoPair4.addCard(c13);
+        twoPair4.addCard(h14);
+        twoPair4.addCard(c14);
 
 
-        Testing.assertEquals("testing high card and pair", -1, highCard1.compareTo(pair1));
-        Testing.assertEquals("testing pair queen and jack", 1, pair1.compareTo(pair2));
+        System.out.println("Flush Tests");
+        Testing.assertEquals("testing flush to flush, one with higher high card", -1, flush1.compareTo(flush2));
+        Testing.assertEquals("testing flush to two pair", 1, flush1.compareTo(twoPair2));
+        Testing.assertEquals("testing flush to pair", 1, flush1.compareTo(pair1));
+        Testing.assertEquals("testing flush to high card", 1, flush1.compareTo(highCard1));
+        Testing.assertEquals("testing flush to flush, both same exact ranks", 0, flush1.compareTo(flush1));
+        Testing.assertEquals("testing flush to four of a kind", 1, flush1.compareTo(twoPair4));
 
+        System.out.println(" ");
+        System.out.println("Two Pair Tests");
+        Testing.assertEquals("testing two pair to pair", 1, twoPair1.compareTo(pair1));
+        Testing.assertEquals("testing two pair to two pair, one w higher ranks", -1, twoPair1.compareTo(twoPair2));
+        Testing.assertEquals("testing two pair to pair, compare high card", -1, twoPair2.compareTo(twoPair3));
+        Testing.assertEquals("testing two pair to two pair, both exact same ranks", 0, twoPair2.compareTo(twoPair2));
+        Testing.assertEquals("testing two pair to high card, compare high card", -1, highCard1.compareTo(twoPair3));
+
+        System.out.println(" ");
+        System.out.println("Pair Tests");
+        Testing.assertEquals("testing pair and high card", -1, highCard1.compareTo(pair1));
+        Testing.assertEquals("testing pair queen to pair jack", 1, pair1.compareTo(pair2));
+        Testing.assertEquals("testing pair queen to pair queen, compare high card", -1, pair1.compareTo(pair3));
+        Testing.assertEquals("testing pair to two pair", -1, pair1.compareTo(twoPair1));
+        Testing.assertEquals("testing pair to high card", 1, pair2.compareTo(highCard1));
+        Testing.assertEquals("testing pair to pair of exact same ranks", 0, pair2.compareTo(pair2));
+        Testing.assertEquals("testing pair to three of a kind of higher ranks", -1, pair2.compareTo(pair4));
+
+        System.out.println(" ");
+        System.out.println("High Card Tests");
+        Testing.assertEquals("testing high card to high card", 1, highCard1.compareTo(highCard2));
+        Testing.assertEquals("testing high card to high card, both same high card, compare second highest card", 1, highCard1.compareTo(highCard2));
+        Testing.assertEquals("testing high card to high card, both hands exact same ranks", 0, highCard2.compareTo(highCard2));
     }
 }
